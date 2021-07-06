@@ -12,14 +12,14 @@ let users = {
 
 describe("Auth Tests", () => {
   Object.keys(users).forEach((userType) => {
-    it("properly signs up for user", async () => {
+    test("properly signs up for user", async () => {
       const response = await request.post("/signup").send(users[userType]);
       expect(response.status).toBe(201);
       expect(response.body.token).toBeDefined();
       expect(response.body.user._id).toBeDefined();
       expect(response.body.user.username).toEqual(users[userType].username);
     });
-    it("properly signs in the user", async () => {
+    test("properly signs in the user", async () => {
       const response = await request
         .post("/signin")
         .auth(users[userType].username, users[userType].password);
